@@ -1,5 +1,7 @@
 {
   "name": "BE-project",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
