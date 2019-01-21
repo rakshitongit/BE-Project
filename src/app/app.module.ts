@@ -9,21 +9,27 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {GooglePlus} from "@ionic-native/google-plus";
 import {TestsPage} from "../pages/tests/tests";
+import {ProgressBarComponent} from "../components/progress-bar/progress-bar";
+import {ServerProvider} from '../providers/server/server';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
         MyApp,
+        ProgressBarComponent,
         HomePage,
         TestsPage,
         LoginPage
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        HttpClientModule,
+        IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
+        ProgressBarComponent,
         HomePage,
         TestsPage,
         LoginPage
@@ -32,6 +38,7 @@ import {TestsPage} from "../pages/tests/tests";
         StatusBar,
         SplashScreen,
         GooglePlus,
+        ServerProvider,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

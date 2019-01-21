@@ -13,7 +13,7 @@ import {TestsPage} from "../pages/tests/tests";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = LoginPage;
+    rootPage: any = HomePage;
 
     pages: Array<{ title: string, component: any, icon: any, color: string, flag: boolean }>;
 

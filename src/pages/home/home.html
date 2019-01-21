@@ -8,5 +8,45 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/dummy.png">
+            </ion-avatar>
+            <h2>Rakshit Bhat</h2>
+            <p class="location-class">Mumbai</p>
+            <button item-end ion-button icon-only clear>
+                <ion-icon color="gray" name="md-arrow-dropright"></ion-icon>
+            </button>
+            <progress-bar [progress]="10"></progress-bar>
+        </ion-item>
+    </ion-card>
+    <ion-card>
+        <button ion-button block icon-left (click)="getMyCondition()">
+            <ion-icon name="md-medkit"></ion-icon>
+            Track my condition
+        </button>
+    </ion-card>
+    <ion-card>
+        <ion-list>
+            <ion-item>
+                <ion-icon name="md-heart-outline" color="primary" item-start></ion-icon>
+                <p>My well being is</p>
+                <span ion-text color="primary" style="font-weight: bold">Good!</span>
+                <ion-icon name="add" color="gray" item-end></ion-icon>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="md-body" color="secondary" item-start></ion-icon>
+                <p>My activity level is</p>
+                <span ion-text color="secondary" style="font-weight: bold">Perfect!</span>
+                <ion-icon name="add" color="gray" item-end></ion-icon>
+            </ion-item>
+            <ion-item>
+                <ion-icon name="md-flask" color="primary" item-start></ion-icon>
+                <p>My medication adherence is</p>
+                <span ion-text color="primary" style="font-weight: bold">Mediocre!</span>
+                <ion-icon name="add" color="gray" item-end></ion-icon>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 </ion-content>
