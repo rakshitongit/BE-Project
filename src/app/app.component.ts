@@ -2,10 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-
-import {HomePage} from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
 import {TestsPage} from "../pages/tests/tests";
+import {MainTabPage} from "../pages/main-tab/main-tab";
 
 @Component({
     templateUrl: 'app.html'
@@ -13,7 +12,7 @@ import {TestsPage} from "../pages/tests/tests";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = HomePage;
+    rootPage: any = MainTabPage;
 
     pages: Array<{ title: string, component: any, icon: any, color: string, flag: boolean }>;
 
@@ -22,7 +21,7 @@ export class MyApp {
 
         // used for an example of ngFor and navigation
         this.pages = [
-            {title: 'Dashboard', component: HomePage, icon: 'ios-home', color: 'red', flag: true},
+            {title: 'Dashboard', component: MainTabPage, icon: 'ios-home', color: 'red', flag: true},
             {title: 'Test Predictor', component: TestsPage, icon: 'ios-flag', color: '#bf20ee', flag: true},
             {title: 'Logout', component: LoginPage, icon: 'ios-power', color: 'red', flag: true}
         ];

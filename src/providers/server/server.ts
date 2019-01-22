@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {LoadingController} from "ionic-angular";
+import {LoadingController, Platform} from "ionic-angular";
+import {Toast} from "@ionic-native/toast";
 
 /*
   Generated class for the ServerProvider provider.
@@ -13,7 +14,10 @@ export class ServerProvider {
 
     loader: any;
 
-    constructor(public http: HttpClient, public loadingCtrl: LoadingController) {
+    constructor(public http: HttpClient,
+                public loadingCtrl: LoadingController,
+                private toast: Toast,
+                private platform: Platform) {
         console.log('Hello ServerProvider Provider');
     }
 
@@ -28,6 +32,16 @@ export class ServerProvider {
 
     closeLoader() {
         this.loader.dismiss();
+    }
+
+    showToast(msg) {
+        if (this.platform.is('cordova')) {
+            this.toast.show(msg, '3000', 'center').subscribe(
+                toast => {
+                    console.log(toast);
+                }
+            );
+        }
     }
 
 }

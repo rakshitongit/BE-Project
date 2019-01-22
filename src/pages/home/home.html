@@ -18,7 +18,7 @@
             <button item-end ion-button icon-only clear>
                 <ion-icon color="gray" name="md-arrow-dropright"></ion-icon>
             </button>
-            <progress-bar [progress]="10"></progress-bar>
+            <progress-bar [progress]="20"></progress-bar>
         </ion-item>
     </ion-card>
     <ion-card>
@@ -31,21 +31,29 @@
         <ion-list>
             <ion-item>
                 <ion-icon name="md-heart-outline" color="primary" item-start></ion-icon>
-                <p>My well being is</p>
-                <span ion-text color="primary" style="font-weight: bold">Good!</span>
-                <ion-icon name="add" color="gray" item-end></ion-icon>
+                <p>My Profile</p>
+                <span *ngIf="!profileFlag" ion-text color="secondary" style="font-weight: bold">Up to date!</span>
+                <span *ngIf="profileFlag" ion-text color="primary" style="font-weight: bold">Incomplete!</span>
+                <button ion-button icon-only item-end clear (click)="addProfile()">
+                    <ion-icon name="add" color="gray"></ion-icon>
+                </button>
             </ion-item>
             <ion-item>
                 <ion-icon name="md-body" color="secondary" item-start></ion-icon>
-                <p>My activity level is</p>
-                <span ion-text color="secondary" style="font-weight: bold">Perfect!</span>
-                <ion-icon name="add" color="gray" item-end></ion-icon>
+                <p>My medical tests</p>
+                <span *ngIf="!medicalFlag" ion-text color="secondary" style="font-weight: bold">Perfect!</span>
+                <span *ngIf="medicalFlag" ion-text color="primary" style="font-weight: bold">Incomplete!</span>
+                <button ion-button icon-only item-end clear (click)="addMedicalTests()">
+                    <ion-icon name="add" color="gray"></ion-icon>
+                </button>
             </ion-item>
-            <ion-item>
+            <ion-item (click)="getMyCondition()">
                 <ion-icon name="md-flask" color="primary" item-start></ion-icon>
-                <p>My medication adherence is</p>
+                <p>Predict Disease</p>
                 <span ion-text color="primary" style="font-weight: bold">Mediocre!</span>
-                <ion-icon name="add" color="gray" item-end></ion-icon>
+                <button item-end ion-button icon-only clear>
+                    <ion-icon color="gray" name="md-arrow-dropright"></ion-icon>
+                </button>
             </ion-item>
         </ion-list>
     </ion-card>

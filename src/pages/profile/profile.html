@@ -1,0 +1,117 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Profile</ion-title>
+        <ion-buttons end>
+            <button ion-button clear navPop>
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label stacked>Full Name <span class="invalid-field">*</span></ion-label>
+            <ion-input type="text" [(ngModel)]="profile.name"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label stacked>Age <span class="invalid-field">*</span></ion-label>
+            <ion-input type="number" [(ngModel)]="profile.age"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>Sex <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.sex">
+                <ion-option value="0">Male</ion-option>
+                <ion-option value="1">Female</ion-option>
+                <ion-option value="2">Rather not say</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>Smokes <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.smoke">
+                <ion-option value="0">Yes</ion-option>
+                <ion-option value="1">No</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="smokesFlag">
+        <ion-item>
+            <ion-label stacked>No of cigarettes per day <span class="invalid-field">*</span></ion-label>
+            <ion-input type="number" [(ngModel)]="profile.cigs"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>Diabetes (Fasting) <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.diabetesFasting">
+                <ion-option value="0">below 100 mg/dL</ion-option>
+                <ion-option value="1">101-130 mg/dL</ion-option>
+                <ion-option value="2">131-160 mg/dL</ion-option>
+                <ion-option value="3">161-190 mg/dL</ion-option>
+                <ion-option value="4">191-210 mg/dL</ion-option>
+                <ion-option value="5">211 and above mg/dL</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>Diabetes (After Eating) <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.diabetes">
+                <ion-option value="0">below 140 mg/dL</ion-option>
+                <ion-option value="1">141-170 mg/dL</ion-option>
+                <ion-option value="2">171-200 mg/dL</ion-option>
+                <ion-option value="3">201-230 mg/dL</ion-option>
+                <ion-option value="4">231-260 mg/dL</ion-option>
+                <ion-option value="5">261 and above mg/dL</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>BP bottom (Diastolic) <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.bpBottom">
+                <ion-option value="0">below 40 mmHg</ion-option>
+                <ion-option value="1">41-50 mmHg</ion-option>
+                <ion-option value="2">51-60 mmHg</ion-option>
+                <ion-option value="3">61-70 mmHg</ion-option>
+                <ion-option value="4">71-80 mmHg</ion-option>
+                <ion-option value="5">81-90 mmHg</ion-option>
+                <ion-option value="6">91 mmHg and above</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label>BP bottom (Diastolic) <span class="invalid-field">*</span></ion-label>
+            <ion-select [(ngModel)]="profile.bpTop">
+                <ion-option value="0">below 70 mmHg</ion-option>
+                <ion-option value="1">71-90 mmHg</ion-option>
+                <ion-option value="2">91-110 mmHg</ion-option>
+                <ion-option value="3">111-130 mmHg</ion-option>
+                <ion-option value="4">131-150 mmHg</ion-option>
+                <ion-option value="5">151-170 mmHg</ion-option>
+                <ion-option value="6">171-190 mmHg</ion-option>
+                <ion-option value="6">191 mmHg and above</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <button ion-button [disabled]="btnflag" round block (click)="saveProfile()">Submit</button>
+        </ion-item>
+    </ion-list>
+</ion-content>
