@@ -10,7 +10,7 @@ import {NavController, NavParams} from 'ionic-angular';
 
 @Component({
     selector: 'page-tests',
-    templateUrl: 'tests.html',
+    templateUrl: 'tests-history.html',
 })
 export class TestsPage {
 

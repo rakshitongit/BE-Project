@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
-import {TestsPage} from "../tests/tests";
+import {TestsPage} from "../tests-history/tests-history";
 
 /**
  * Generated class for the MainTabPage page.

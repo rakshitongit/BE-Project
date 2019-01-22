@@ -27,7 +27,7 @@ export class HomePage {
             }, 3000);
         }
         else {
-            this.server.showToast('Please fill the above details');
+            this.server.showToast('Please fill the details');
         }
     }
 
