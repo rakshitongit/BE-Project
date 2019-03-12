@@ -3,7 +3,6 @@ import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
-import {TestsPage} from "../pages/tests-history/tests-history";
 import {MainTabPage} from "../pages/main-tab/main-tab";
 
 @Component({
@@ -22,10 +21,8 @@ export class MyApp {
         // used for an example of ngFor and navigation
         this.pages = [
             {title: 'Dashboard', component: MainTabPage, icon: 'ios-home', color: 'red', flag: true},
-            {title: 'Test Predictor', component: TestsPage, icon: 'ios-flag', color: '#bf20ee', flag: true},
             {title: 'Logout', component: LoginPage, icon: 'ios-power', color: 'red', flag: true}
         ];
-
     }
 
     initializeApp() {

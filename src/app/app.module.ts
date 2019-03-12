@@ -1,19 +1,21 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {ErrorHandler, NgModule} from '@angular/core';
-import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-import {MyApp} from './app.component';
-import {HomePage} from '../pages/home/home';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
-import {GooglePlus} from "@ionic-native/google-plus";
-import {TestsPage} from "../pages/tests-history/tests-history";
-import {ProgressBarComponent} from "../components/progress-bar/progress-bar";
-import {ServerProvider} from '../providers/server/server';
-import {HttpClientModule} from "@angular/common/http";
-import {MedicalTestsPage, ProfilePage} from "../pages/profile/profile";
-import {Toast} from "@ionic-native/toast";
-import {MainTabPage} from "../pages/main-tab/main-tab";
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from "../pages/login/login";
+import { GooglePlus } from "@ionic-native/google-plus";
+import { TestsPage } from "../pages/tests-history/tests-history";
+import { ProgressBarComponent } from "../components/progress-bar/progress-bar";
+import { ServerProvider } from '../providers/server/server';
+import { HttpClientModule } from "@angular/common/http";
+import { MedicalTestsPage, ProfilePage } from "../pages/profile/profile";
+import { Toast } from "@ionic-native/toast";
+import { Health } from "@ionic-native/health";
+import { MainTabPage } from "../pages/main-tab/main-tab";
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import {MainTabPage} from "../pages/main-tab/main-tab";
         GooglePlus,
         ServerProvider,
         Toast,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        Health,
+        LocalNotifications,
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })
 export class AppModule {

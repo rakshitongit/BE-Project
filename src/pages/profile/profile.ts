@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { ServerProvider } from '../../providers/server/server';
 
 /**
  * Generated class for the ProfilePage page.
@@ -32,8 +33,8 @@ export class ProfilePage {
     btnflag: boolean = false;
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                public viewCtrl: ViewController) {
+        public navParams: NavParams,
+        public viewCtrl: ViewController) {
     }
 
     ionViewDidLoad() {
@@ -79,14 +80,34 @@ export class MedicalTestsPage {
     btnflag: boolean = false;
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                public viewCtrl: ViewController) {
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        private server: ServerProvider) {
     }
 
-    ionViewDidLoad() {
+    ionViewDidEnter() {
+        this.getDataFromHealth();
         setInterval(() => {
             this.btnflag = (this.medicaltests.cp == '' || this.medicaltests.trestbps == '' || this.medicaltests.chol == '' || this.medicaltests.fbs == '' || this.medicaltests.restecg == '' || this.medicaltests.thalach == '' || this.medicaltests.exang == '' || this.medicaltests.oldpeak == '' || this.medicaltests.slope == '' || this.medicaltests.thal == '' || this.medicaltests.num == '');
         })
+    }
+
+    getDataFromHealth() {
+        this.server.getHealthQuery('blood_pressure').then(data => {
+            console.log(data)
+            if (data.length > 0) {
+                data.reverse();
+                this.medicaltests.trestbps = data[0]["value"]["systolic"];
+                this.server.showToast("Latest Blood Pressure detected from google Fit app: " + data[0]["value"]["systolic"] + ' / ' + data[0]["value"]["diastolic"] + ' ' + data[0]["unit"])
+            }
+        }).catch(err => console.log(err));
+        this.server.getHealthQuery('heart_rate').then(data => {
+            console.log(data)
+            if (data.length > 0) {
+                data.reverse();
+                this.server.showToast("Latest heart_rate detected from google Fit app: " + data[0]["value"]["systolic"] + ' / ' + data[0]["value"]["diastolic"] + ' ' + data[0]["unit"])
+            }
+        }).catch(err => console.log(err));
     }
 
     saveMedicaltests() {

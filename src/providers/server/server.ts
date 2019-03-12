@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {LoadingController, Platform} from "ionic-angular";
 import {Toast} from "@ionic-native/toast";
+import { Health } from '@ionic-native/health';
 
 /*
   Generated class for the ServerProvider provider.
@@ -17,7 +18,8 @@ export class ServerProvider {
     constructor(public http: HttpClient,
                 public loadingCtrl: LoadingController,
                 private toast: Toast,
-                private platform: Platform) {
+                private platform: Platform,
+                public health: Health) {
         console.log('Hello ServerProvider Provider');
     }
 
@@ -42,6 +44,15 @@ export class ServerProvider {
                 }
             );
         }
+    }
+
+    getHealthQuery(param: string) {
+        return this.health.query({
+            startDate: new Date(new Date().getTime() - 5 * 24 * 60 * 60 * 1000), // three days ago
+            endDate: new Date(), // now
+            dataType: param,
+            limit: 1000
+        })
     }
 
 }
