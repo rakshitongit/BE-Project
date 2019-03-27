@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ServerProvider } from '../../providers/server/server';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the ProfilePage page.
@@ -34,7 +35,8 @@ export class ProfilePage {
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
-        public viewCtrl: ViewController) {
+        public viewCtrl: ViewController,
+        public storage: Storage) {
     }
 
     ionViewDidLoad() {
@@ -45,6 +47,7 @@ export class ProfilePage {
     }
 
     saveProfile() {
+        this.storage.set('profile', this.profile);
         this.data.success = true;
         this.dismiss();
     }
@@ -72,24 +75,27 @@ export class MedicalTestsPage {
         exang: '',
         oldpeak: '',
         slope: '',
-        thal: ''
+        thal: '',
+        ca: ''
     };
     data: any = {
         success: false
     };
-    btnflag: boolean = false;
+    btnflag: boolean = true;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
         public viewCtrl: ViewController,
-        private server: ServerProvider) {
+        private server: ServerProvider,
+        public storage: Storage) {
     }
 
     ionViewDidEnter() {
         this.getDataFromHealth();
-        setInterval(() => {
-            this.btnflag = (this.medicaltests.cp == '' || this.medicaltests.trestbps == '' || this.medicaltests.chol == '' || this.medicaltests.fbs == '' || this.medicaltests.restecg == '' || this.medicaltests.thalach == '' || this.medicaltests.exang == '' || this.medicaltests.oldpeak == '' || this.medicaltests.slope == '' || this.medicaltests.thal == '' || this.medicaltests.num == '');
-        })
+
+        // setInterval(() => {
+        //     this.btnflag = (this.medicaltests.cp == '' || this.medicaltests.trestbps == '' || this.medicaltests.chol == '' || this.medicaltests.fbs == '' || this.medicaltests.restecg == '' || this.medicaltests.thalach == '' || this.medicaltests.exang == '' || this.medicaltests.oldpeak == '' || this.medicaltests.slope == '' || this.medicaltests.thal == '' || this.medicaltests.num == '');
+        // })
     }
 
     getDataFromHealth() {
@@ -110,9 +116,50 @@ export class MedicalTestsPage {
         }).catch(err => console.log(err));
     }
 
+    getTests(val) {
+        let k = [];
+        switch (val) {
+            case 3:
+                k.push("MRI")
+                k.push("CT scan")
+            case 2:
+                k.push("Holter Monitoring Test")
+                k.push("Stress Test")
+            case 1:
+                k.push("ECG");
+        }
+        return k.reverse();
+    }
+
     saveMedicaltests() {
-        this.data.success = true;
-        this.dismiss();
+        let age, sex
+        this.storage.get('profile').then(val => {
+            age = val["age"]
+            sex = val["sex"]
+            this.server.showLoaders('Synchronizing....')
+            let data = "run?cp=" + this.medicaltests["cp"] + "&trestbps=" + this.medicaltests["trestbps"] + "&chol=" + this.medicaltests["chol"] + "&fbs=" + this.medicaltests["fbs"] + "&restecg=" + this.medicaltests["restecg"] + "&thalach=" + this.medicaltests["thalach"] + "&exang=" + this.medicaltests["exang"] + "&oldpeak=" + this.medicaltests["oldpeak"] + "&slope=" + this.medicaltests["slope"] + "&ca=" + this.medicaltests["ca"] + "&thal=" + this.medicaltests["thal"] + "&age=" + age + "&sex=" + sex;
+            this.server.getPredictions(data).subscribe(val => {
+                console.log(val);
+                this.storage.get('result').then(value => {
+                    console.log("Result ", value);
+                    let data = {
+                        result: val["result"],
+                        tests: this.getTests(parseInt(val["result"])),
+                        date: new Date()
+                    }
+                    if (value !== null) {
+                        value.push(data)
+                    } else {
+                        value = [];
+                        value.push(data)
+                    }
+                    this.storage.set('result', value)
+                })
+                this.data.success = true;
+                this.dismiss();
+                this.server.closeLoader();
+            })
+        })
     }
 
     dismiss() {

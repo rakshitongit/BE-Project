@@ -14,8 +14,11 @@ import { HttpClientModule } from "@angular/common/http";
 import { MedicalTestsPage, ProfilePage } from "../pages/profile/profile";
 import { Toast } from "@ionic-native/toast";
 import { Health } from "@ionic-native/health";
+import { SocialSharing } from "@ionic-native/social-sharing"; 
 import { MainTabPage } from "../pages/main-tab/main-tab";
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
     declarations: [
@@ -31,7 +34,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     imports: [
         BrowserModule,
         HttpClientModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -52,6 +56,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
         Toast,
         Health,
         LocalNotifications,
+        SocialSharing,
+        LocationAccuracy,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })

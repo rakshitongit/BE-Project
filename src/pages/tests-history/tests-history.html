@@ -14,21 +14,21 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
+    <ion-list *ngFor="let k of results">
         <ion-list-header style="font-weight: bold">
-            Week 1: (01/01/2019 - 07/01/2019)
+            Date : {{k.date | date: 'medium'}}
+            <ion-badge item-end
+                (click)="server.share('Heart Disease Prediction System\n\nPatient Name: Rakshit Bhat\nPredicted Test: '+getList(k.tests)+'\n\n','','https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX18848544.jpg','https://fit.google.com/ \n\n Shared via SSR Mobile App')">
+                <ion-icon name="md-share"></ion-icon>
+            </ion-badge>
         </ion-list-header>
-        <ion-item>ECG</ion-item>
-        <ion-list-header style="font-weight: bold">
-            Week 2: (08/01/2019 - 15/01/2019)
-        </ion-list-header>
-        <ion-item>ECG</ion-item>
-        <ion-item>MRI</ion-item>
-        <ion-list-header style="font-weight: bold">
-            Week 3: (16/01/2019 - 22/01/2019)
-        </ion-list-header>
-        <ion-item>ECG</ion-item>
-        <ion-item>MRI</ion-item>
-        <ion-item>MRI</ion-item>
+        <span *ngIf="k.tests.length == 0">
+            <ion-item>
+                No Tests Required
+            </ion-item>
+        </span>
+        <ion-item *ngFor="let test of k.tests">
+            {{test}}
+        </ion-item>
     </ion-list>
 </ion-content>

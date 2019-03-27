@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { ServerProvider } from '../../providers/server/server';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the TestsPage page.
@@ -14,11 +16,26 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 export class TestsPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    results: any = [];
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        public server: ServerProvider,
+        public storage: Storage) {
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad TestsPage');
+    ionViewDidEnter() {
+        this.storage.get('result').then(data => {
+            console.log("result", data);
+            this.results = data;
+        })
     }
 
+    getList(list) {
+        let val = "";
+        for (let ev of list) {
+            val += ev + "  "
+        }
+        if (list.length == 0)
+            val = "No tests required"
+        return val;
+    }
 }

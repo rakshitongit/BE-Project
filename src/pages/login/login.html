@@ -19,7 +19,7 @@
         <ion-item text-center>
             <img src="assets/imgs/icon.png" alt="" width="120">
         </ion-item>
-        <ion-item>
+        <!-- <ion-item>
             <ion-label stacked>Enter Email Address</ion-label>
             <ion-input type="email" [(ngModel)]="login.email"></ion-input>
         </ion-item>
@@ -27,18 +27,16 @@
         <ion-item>
             <ion-label stacked>Enter Password</ion-label>
             <ion-input type="password" [(ngModel)]="login.password"></ion-input>
+        </ion-item> -->
+        <ion-item>
+            <ion-label stacked>Enter base Url</ion-label>
+            <ion-input type="text" [(ngModel)]="login.baseurl"></ion-input>
         </ion-item>
 
         <ion-item>
             <button ion-button block round (click)="logIn()" [disabled]="btndisable">Sign in</button>
             <!-- <button class="top-10" ion-button block round (click)="googleLogIn()">Google Plus Login</button> -->
-            <button class="top-10" ion-button block round (click)="register()">Register</button>
-        </ion-item>
-
-        <ion-item>
-            <p text-center>
-                Forgot Password? <span (click)="resetPassword()" ion-text color="primary">Reset Password</span>
-            </p>
+            <!-- <button class="top-10" ion-button block round (click)="register()">Register</button> -->
         </ion-item>
     </ion-list>
 </ion-content>

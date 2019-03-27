@@ -1,8 +1,10 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {LoadingController, Platform} from "ionic-angular";
-import {Toast} from "@ionic-native/toast";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { LoadingController, Platform } from "ionic-angular";
+import { Toast } from "@ionic-native/toast";
 import { Health } from '@ionic-native/health';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the ServerProvider provider.
@@ -15,12 +17,19 @@ export class ServerProvider {
 
     loader: any;
 
+    serverUrl = "";
+
     constructor(public http: HttpClient,
-                public loadingCtrl: LoadingController,
-                private toast: Toast,
-                private platform: Platform,
-                public health: Health) {
-        console.log('Hello ServerProvider Provider');
+        public loadingCtrl: LoadingController,
+        private toast: Toast,
+        private platform: Platform,
+        public health: Health,
+        public socialSharing: SocialSharing,
+        public storage: Storage) {
+        this.storage.get('baseUrl').then(data => {
+            console.log(data);
+            this.serverUrl = data;
+        })
     }
 
     showLoaders(msg: any) {
@@ -34,6 +43,14 @@ export class ServerProvider {
 
     closeLoader() {
         this.loader.dismiss();
+    }
+
+    share(message, subject, file, url) {
+        this.socialSharing.share(message, subject, file, url).then(() => {
+            // Sharing via email is possible
+        }).catch(() => {
+            // Sharing via email is not possible
+        });
     }
 
     showToast(msg) {
@@ -53,6 +70,10 @@ export class ServerProvider {
             dataType: param,
             limit: 1000
         })
+    }
+
+    getPredictions(url) {
+        return this.http.get(this.serverUrl + url);
     }
 
 }

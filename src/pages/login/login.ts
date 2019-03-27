@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {HomePage} from "../home/home";
-import {GooglePlus} from "@ionic-native/google-plus";
+import { MainTabPage } from './../main-tab/main-tab';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { GooglePlus } from "@ionic-native/google-plus";
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -15,20 +16,26 @@ import {GooglePlus} from "@ionic-native/google-plus";
     templateUrl: 'login.html',
 })
 export class LoginPage {
-    login: any = {};
+    login: any = {
+        email: "",
+        password: "",
+        baseurl: ""
+    };
     btndisable: boolean;
 
     constructor(public navCtrl: NavController,
-                public navParams: NavParams,
-                private googlePlus: GooglePlus) {
+        public navParams: NavParams,
+        private googlePlus: GooglePlus,
+        public storage: Storage) {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
+        
     }
 
     logIn() {
-        this.navCtrl.setRoot(HomePage);
+        this.storage.set('baseUrl', this.login.baseurl);
+        this.navCtrl.setRoot(MainTabPage);
     }
 
     resetPassword() {

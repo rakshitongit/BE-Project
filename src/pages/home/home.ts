@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { ModalController, NavController, AlertController } from 'ionic-angular';
 import { ServerProvider } from "../../providers/server/server";
 import { MedicalTestsPage, ProfilePage } from "../profile/profile";
 import { Health } from '@ionic-native/health';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-home',
@@ -14,12 +15,17 @@ export class HomePage {
     profile: any;
     profileFlag: boolean = true;
     medicalFlag: boolean = true;
+    progress: number = 10;
+    timerP: any;
+    timerM: any;
 
     constructor(public navCtrl: NavController,
         public server: ServerProvider,
         public modalCtrl: ModalController,
         public health: Health,
-        public localNotifications: LocalNotifications) {
+        public localNotifications: LocalNotifications,
+        public alertCtrl: AlertController,
+        public storage: Storage) {
 
     }
 
@@ -36,7 +42,6 @@ export class HomePage {
                 ])
                     .then(res => {
                         console.log(res)
-                        this.server.getHealthQuery('blood_pressure');
                     })
                     .catch(e => console.log(e));
             })
@@ -45,24 +50,64 @@ export class HomePage {
 
     ionViewDidEnter() {
         this.healthSettings();
-        this.localNotifications.schedule({
-            title: 'My first notification',
-            text: 'Thats pretty easy...',
-            foreground: true
+        // this.localNotifications.schedule({
+        //     title: 'My first notification',
+        //     text: 'Thats pretty easy...'
+        // })
+        this.storage.get('profile').then(val => {
+            if (val !== null) {
+                this.profileFlag = false;
+                if (this.progress < 40) {
+                    this.timerP = setInterval(() => {
+                        this.progress++;
+                        if (this.progress == 40) {
+                            clearInterval(this.timerP)
+                        }
+                    }, 120)
+                }
+            }
         })
-
     }
 
     getMyCondition() {
         if (!this.profileFlag && !this.medicalFlag) {
-            this.server.showLoaders('Please Wait');
+            this.server.showLoaders('Please Wait....');
             setTimeout(() => {
                 this.server.closeLoader();
-            }, 3000);
+                this.storage.get('result').then(val => {
+                    console.log(val.reverse());
+                    this.showAlert(parseInt(val[0]["result"]));
+                })
+            }, 2000);
         }
         else {
             this.server.showToast('Please fill the details');
         }
+    }
+
+    showAlert(data) {
+        let val = "";
+        switch (data) {
+            case 0:
+                val = "No tests required";
+                break;
+            case 1:
+                val = "ECG";
+                break;
+            case 2:
+                val = "ECG, Stress Test and Holter Monitoring Test";
+                break;
+            case 3:
+                val = "ECG, Stress Test, Holter Monitoring Test and MRI";
+                break;
+        }
+        const alert = this.alertCtrl.create({
+            title: 'Result!',
+            subTitle: 'Tests Predicted are:',
+            message: val,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
     addProfile() {
@@ -79,8 +124,17 @@ export class HomePage {
         let modal = this.modalCtrl.create(MedicalTestsPage, { profile: this.profile });
         modal.present();
         modal.onDidDismiss((data) => {
-            if (data !== undefined && data["success"]) {
+            if (data !== null && data["success"]) {
                 this.medicalFlag = false;
+                // if (this.progress < 100) {
+                //     this.timerM = setInterval(() => {
+                //         this.progress++;
+                //         if (this.progress == 100) {
+                //             clearInterval(this.timerM);
+                //         }
+                //     }, 120)
+                // }
+                this.progress = 100
             }
         })
     }

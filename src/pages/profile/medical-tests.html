@@ -17,7 +17,8 @@
 
 
 <ion-content>
-    <h4 padding text-center ion-text color="contrast"><b><span ion-text color="primary">Note:</span> This is to be filled under the Doctor's Supervision!</b></h4>
+    <h4 padding text-center ion-text color="contrast"><b><span ion-text color="primary">Note:</span> This is to be
+            filled under the Doctor's Supervision!</b></h4>
     <ion-list>
         <ion-item>
             <ion-label>Chest Pain <span class="invalid-field">*</span></ion-label>
@@ -44,7 +45,10 @@
     <ion-list>
         <ion-item>
             <ion-label stacked>Fasting Blood Sugar (mg/dL) <span class="invalid-field">*</span></ion-label>
-            <ion-input type="number" [(ngModel)]="medicaltests.fbs"></ion-input>
+            <ion-select [(ngModel)]="medicaltests.fbs">
+                <ion-option value="0">Normal</ion-option>
+                <ion-option value="1">Has Significant</ion-option>
+            </ion-select>
         </ion-item>
     </ion-list>
     <ion-list>
@@ -52,7 +56,7 @@
             <ion-label>Rest ECG <span class="invalid-field">*</span></ion-label>
             <ion-select [(ngModel)]="medicaltests.restecg">
                 <ion-option value="0">Normal</ion-option>
-                <ion-option value="1">having ST abnormality</ion-option>
+                <ion-option value="1">Having ST abnormality</ion-option>
                 <ion-option value="2">Showing left ventricular hypertrophy by Estes' criteria</ion-option>
             </ion-select>
         </ion-item>
@@ -89,6 +93,17 @@
         </ion-item>
     </ion-list>
     <ion-list>
+            <ion-item>
+                <ion-label>number of major vessels (0-3) colored by flourosopy (ca) <span class="invalid-field">*</span></ion-label>
+                <ion-select [(ngModel)]="medicaltests.ca">
+                    <ion-option value="0">0</ion-option>
+                    <ion-option value="1">1</ion-option>
+                    <ion-option value="2">2</ion-option>
+                    <ion-option value="3">3</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    <ion-list>
         <ion-item>
             <ion-label>Thal <span class="invalid-field">*</span></ion-label>
             <ion-select [(ngModel)]="medicaltests.thal">
@@ -100,7 +115,7 @@
     </ion-list>
     <ion-list>
         <ion-item>
-            <button ion-button [disabled]="btnflag" round block (click)="saveMedicaltests()">Submit</button>
+            <button ion-button round block (click)="saveMedicaltests()">Submit</button>
         </ion-item>
     </ion-list>
 </ion-content>
