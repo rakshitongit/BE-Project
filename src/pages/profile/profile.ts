@@ -119,8 +119,9 @@ export class MedicalTestsPage {
     getTests(val) {
         let k = [];
         switch (val) {
-            case 3:
+            case 4:
                 k.push("MRI")
+            case 3:
                 k.push("CT scan")
             case 2:
                 k.push("Holter Monitoring Test")

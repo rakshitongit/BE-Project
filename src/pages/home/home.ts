@@ -98,7 +98,10 @@ export class HomePage {
                 val = "ECG, Stress Test and Holter Monitoring Test";
                 break;
             case 3:
-                val = "ECG, Stress Test, Holter Monitoring Test and MRI";
+                val = "ECG, Stress Test Holter Monitoring Test and CT scan";
+                break;
+            case 4:
+                val = "ECG, Stress Test, Holter Monitoring Test, CT scan and MRI";
                 break;
         }
         const alert = this.alertCtrl.create({

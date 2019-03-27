@@ -26,10 +26,11 @@ export class ServerProvider {
         public health: Health,
         public socialSharing: SocialSharing,
         public storage: Storage) {
-        this.storage.get('baseUrl').then(data => {
-            console.log(data);
-            this.serverUrl = data;
-        })
+        setInterval(() => {
+            this.storage.get('baseUrl').then(data => {
+                this.serverUrl = data;
+            })
+        }, 1000)
     }
 
     showLoaders(msg: any) {
