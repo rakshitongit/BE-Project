@@ -47,10 +47,14 @@ export class ServerProvider {
     }
 
     share(message, subject, file, url) {
+        this.showLoaders('Please wait...')
         this.socialSharing.share(message, subject, file, url).then(() => {
             // Sharing via email is possible
+            this.closeLoader()
+            this.showToast('Shared the result.')
         }).catch(() => {
             // Sharing via email is not possible
+            this.closeLoader()
         });
     }
 

@@ -48,12 +48,17 @@ export class HomePage {
             .catch(e => console.log(e));
     }
 
+    ionViewDidLoad() {
+        setTimeout(() => {
+            this.localNotifications.schedule({
+                title: 'Check your heart disease',
+                text: 'Its time to get going. \nCheck your heart rate and be aware of the heart diseases'
+            })
+        }, 10000)
+    }
+
     ionViewDidEnter() {
         this.healthSettings();
-        // this.localNotifications.schedule({
-        //     title: 'My first notification',
-        //     text: 'Thats pretty easy...'
-        // })
         this.storage.get('profile').then(val => {
             if (val !== null) {
                 this.profileFlag = false;

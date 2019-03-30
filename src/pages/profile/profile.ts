@@ -52,6 +52,14 @@ export class ProfilePage {
         this.dismiss();
     }
 
+    ionViewDidEnter() {
+        this.storage.get('profile').then(val => {
+            if (val !== null) {
+                this.profile = val
+            }
+        })
+    }
+
     dismiss() {
         this.viewCtrl.dismiss(this.data);
     }

@@ -18,11 +18,11 @@
         <ion-list-header style="font-weight: bold">
             Date : {{k.date | date: 'medium'}}
             <ion-badge item-end
-                (click)="server.share('Heart Disease Prediction System\n\nPatient Name: Rakshit Bhat\nPredicted Test: '+getList(k.tests)+'\n\n','','https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX18848544.jpg','https://fit.google.com/ \n\n Shared via SSR Mobile App')">
+                (click)="server.share('Heart Disease Prediction System\n\nPatient Name: '+getName()+'\nPredicted Test: '+getList(k.tests)+'\n\n','','https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX18848544.jpg','https://fit.google.com/ \n\n Shared via SSR Mobile App')">
                 <ion-icon name="md-share"></ion-icon>
             </ion-badge>
         </ion-list-header>
-        <span *ngIf="k.tests.length == 0">
+        <span *ngIf="k.tests.length == 0"> 
             <ion-item>
                 No Tests Required
             </ion-item>

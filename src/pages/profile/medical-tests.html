@@ -93,16 +93,17 @@
         </ion-item>
     </ion-list>
     <ion-list>
-            <ion-item>
-                <ion-label>number of major vessels (0-3) colored by flourosopy (ca) <span class="invalid-field">*</span></ion-label>
-                <ion-select [(ngModel)]="medicaltests.ca">
-                    <ion-option value="0">0</ion-option>
-                    <ion-option value="1">1</ion-option>
-                    <ion-option value="2">2</ion-option>
-                    <ion-option value="3">3</ion-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
+        <ion-item>
+            <ion-label>Number of major vessels (0-3) colored by flourosopy (ca) <span class="invalid-field">*</span>
+            </ion-label>
+            <ion-select [(ngModel)]="medicaltests.ca">
+                <ion-option value="0">0</ion-option>
+                <ion-option value="1">1</ion-option>
+                <ion-option value="2">2</ion-option>
+                <ion-option value="3">3</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
     <ion-list>
         <ion-item>
             <ion-label>Thal <span class="invalid-field">*</span></ion-label>

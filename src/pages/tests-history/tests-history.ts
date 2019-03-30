@@ -21,12 +21,20 @@ export class TestsPage {
         public server: ServerProvider,
         public storage: Storage) {
     }
+    name: any;
 
     ionViewDidEnter() {
         this.storage.get('result').then(data => {
             console.log("result", data);
             this.results = data;
         })
+        this.storage.get('profile').then(val => {
+            this.name =  val["name"]
+        })
+    }
+
+    getName() {
+        return this.name;
     }
 
     getList(list) {
