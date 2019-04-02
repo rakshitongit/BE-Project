@@ -17,7 +17,8 @@ import { Storage } from '@ionic/storage';
 export class TestsPage {
 
     results: any = [];
-    constructor(public navCtrl: NavController, public navParams: NavParams,
+    constructor(public navCtrl: NavController, 
+        public navParams: NavParams,
         public server: ServerProvider,
         public storage: Storage) {
     }
